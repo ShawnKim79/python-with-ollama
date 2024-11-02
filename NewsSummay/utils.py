@@ -21,7 +21,6 @@ topic_urls = {
     "Nvidia": "https://nvidianews.nvidia.com/releases.xml",
     "Raspberry Pi": "https://www.raspberrypi.com/news/feed/", 
     "Music": "https://www.billboard.com/c/music/music-news/feed/"
-
 }
 
 # Use curses to create a menu of topics

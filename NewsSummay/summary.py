@@ -12,7 +12,7 @@ import nltk
 # 문서 청크 리스트가 있으면 번역을 해주는 함수
 def translate_documents(txt_input):
     llm = Ollama(
-      model="gemma:latest", 
+      model="llama3.1", 
       base_url="http://localhost:11434", 
     )
 
