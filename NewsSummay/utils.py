@@ -12,11 +12,16 @@ from mattsollamatools import chunker
 
 # Create a dictionary to store topics and their URLs
 topic_urls = {
+    # "1. 첨단기술": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    # "2. 경제": "https://feeds.bbci.co.uk/news/business/rss.xml",
+    # "3. 과학": "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
+    # "4. 세계": "https://feeds.bbci.co.uk/news/world/rss.xml",
     "Mac": "https://9to5mac.com/guides/mac/feed",
     "News": "http://www.npr.org/rss/rss.php?id=1001",
     "Nvidia": "https://nvidianews.nvidia.com/releases.xml",
     "Raspberry Pi": "https://www.raspberrypi.com/news/feed/", 
     "Music": "https://www.billboard.com/c/music/music-news/feed/"
+
 }
 
 # Use curses to create a menu of topics
