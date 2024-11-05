@@ -16,11 +16,16 @@ topic_urls = {
     # "2. 경제": "https://feeds.bbci.co.uk/news/business/rss.xml",
     # "3. 과학": "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
     # "4. 세계": "https://feeds.bbci.co.uk/news/world/rss.xml",
-    "Mac": "https://9to5mac.com/guides/mac/feed",
-    "News": "http://www.npr.org/rss/rss.php?id=1001",
-    "Nvidia": "https://nvidianews.nvidia.com/releases.xml",
-    "Raspberry Pi": "https://www.raspberrypi.com/news/feed/", 
-    "Music": "https://www.billboard.com/c/music/music-news/feed/"
+    # "Mac": "https://9to5mac.com/guides/mac/feed",
+    # "News": "http://www.npr.org/rss/rss.php?id=1001",
+    # "Nvidia": "https://nvidianews.nvidia.com/releases.xml",
+    # "Raspberry Pi": "https://www.raspberrypi.com/news/feed/", 
+    # "Music": "https://www.billboard.com/c/music/music-news/feed/"
+    "1. 최신뉴스" : "https://www.yna.co.kr/rss/news.xml",
+    "2. 경제" : "https://www.yna.co.kr/rss/economy.xml",
+    "3. 세계" : "https://www.yna.co.kr/rss/international.xml",
+    "4. 스포츠" : "https://www.yna.co.kr/rss/sports.xml"
+
 }
 
 # Use curses to create a menu of topics
@@ -38,7 +43,7 @@ def get_url_for_topic(stdscr):
     curses.curs_set(0)  # Hide the cursor
     stdscr.clear()
 
-    stdscr.addstr(0, 0, "Choose a topic using the arrow keys (Press Enter to select):")
+    stdscr.addstr(0, 0, "화살표 키로 뉴스 주제를 선택후 엔터키를 누르세요:")
 
     # Create a list of topics
     topics = list(topic_urls.keys())
@@ -73,17 +78,18 @@ def getUrls(feed_url, n=20):
 def getArticleText(url):
   article = Article(url)
   article.download()
+  print(article.text)
   article.parse()
   return article.text
 
 def get_summary(text):
-  systemPrompt = "Write a concise summary of the text, return your responses with 5 lines that cover the key points of the text given."
+  systemPrompt = "텍스트의 간결한 요약을 작성하고, 주어진 텍스트의 핵심 사항을 포함하는 5줄로 응답을 반환하세요."
   prompt = text
   
   url = "http://localhost:11434/api/generate"
 
   payload = {
-    "model": "mistral-openorca",
+    "model": "gemma2",
     "prompt": prompt, 
     "system": systemPrompt,
     "stream": False
