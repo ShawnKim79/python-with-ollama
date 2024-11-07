@@ -69,7 +69,7 @@ def get_url_for_topic(stdscr):
 
 # Get the last N URLs from an RSS feed
 def getUrls(feed_url, n=20):
-    feed = feedparser.parse(feed_url)
+    feed = feedparser.parse(feed_url) # rss feed parsing
     entries = feed.entries[-n:]
     urls = [entry.link for entry in entries]
     return urls
@@ -78,12 +78,12 @@ def getUrls(feed_url, n=20):
 def getArticleText(url):
   article = Article(url)
   article.download()
-  print(article.text)
+#   print(article.text)
   article.parse()
   return article.text
 
 def get_summary(text):
-  systemPrompt = "텍스트의 간결한 요약을 작성하고, 주어진 텍스트의 핵심 사항을 포함하는 5줄로 응답을 반환하세요."
+  systemPrompt = "텍스트의 간결한 요약을 작성하고, 주어진 텍스트의 핵심 사항을 5줄로 정리한 응답을 반환하세요."
   prompt = text
   
   url = "http://localhost:11434/api/generate"
@@ -101,18 +101,18 @@ def get_summary(text):
   return json.loads(response.text)["response"]
 
 # Perform K-nearest neighbors (KNN) search
-def knn_search(question_embedding, embeddings, k=5):
-    X = np.array([item['embedding'] for article in embeddings for item in article['embeddings']])
-    source_texts = [item['source'] for article in embeddings for item in article['embeddings']]
+# def knn_search(question_embedding, embeddings, k=5):
+#     X = np.array([item['embedding'] for article in embeddings for item in article['embeddings']])
+#     source_texts = [item['source'] for article in embeddings for item in article['embeddings']]
     
-    # Fit a KNN model on the embeddings
-    knn = NearestNeighbors(n_neighbors=k, metric='cosine')
-    knn.fit(X)
+#     # Fit a KNN model on the embeddings
+#     knn = NearestNeighbors(n_neighbors=k, metric='cosine')
+#     knn.fit(X)
     
-    # Find the indices and distances of the k-nearest neighbors
-    distances, indices = knn.kneighbors(question_embedding, n_neighbors=k)
+#     # Find the indices and distances of the k-nearest neighbors
+#     distances, indices = knn.kneighbors(question_embedding, n_neighbors=k)
     
-    # Get the indices and source texts of the best matches
-    best_matches = [(indices[0][i], source_texts[indices[0][i]]) for i in range(k)]
+#     # Get the indices and source texts of the best matches
+#     best_matches = [(indices[0][i], source_texts[indices[0][i]]) for i in range(k)]
     
-    return best_matches
+#     return best_matches
